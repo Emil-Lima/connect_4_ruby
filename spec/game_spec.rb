@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require './lib/game'
-require './lib/player' # Comment out the require in game.rb to make the test work
+require './lib/player' # Comment out this require in game.rb to make the test work
 
 describe Game do
   describe '#name' do
