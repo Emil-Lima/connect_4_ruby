@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Comment out all the require in game.rb to make the tests work
+
 require './lib/player'
 
 describe Player do

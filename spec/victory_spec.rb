@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+# Comment out all the require in game.rb to make the tests work
+
 require './lib/game'
-require './lib/player' # Comment out this require in game.rb to make the test work
+require './lib/player'
 
 describe Game do
   describe '#victory' do
