@@ -1,16 +1,44 @@
 # frozen_string_literal: true
 
-# module with helper functions and constants
+# module with helper functions
 module MultiFunction
-  VICTORIOUS = [1, 1, 1, 1].freeze
+  def horizontal_victory(player)
+    grid.background_grid.each do |line|
+      if line.join.include?("#{player.element} #{player.element} #{player.element} #{player.element}")
+        victory_message(player.name)
+        return
+      end
+    end
+    "keep playing"
+  end
 
-  def victory
-    if player1.moves == VICTORIOUS
-      victory_message(player1.name)
-    elsif player2.moves == (VICTORIOUS)
-      victory_message(player2.name)
+  def vertical_victory(player)
+    length_full_array = grid.background_grid.length - 1
+    length_element_array = grid.background_grid[0].join.length - 1
+    while length_element_array >= 0
+      vertical = []
+      grid.background_grid.map do |el|
+        vertical.push(el.join[length_element_array])
+      end
+      if vertical.join.include?("#{player.element}#{player.element}#{player.element}#{player.element}")
+        victory_message(player.name)
+        return
+      end
+      length_element_array -= 1
+    end
+    "keep playing"
+  end
+
+  def diagonal_victory(player)
+
+    "keep playing"
+  end
+
+  def full_victory(player)
+    if vertical_victory(player) == "keep playing" && horizontal_victory(player)
+      return "keep playing"
     else
-      'no'
+      return
     end
   end
 
@@ -19,15 +47,22 @@ module MultiFunction
   end
 
   def round
-    player_turn(@player1)
-    player_turn(@player2)
+    player_turn(player1)
+    if full_victory(@player1) == "keep playing"
+      player_turn(player2)
+      if full_victory(@player2) == "keep playing"
+        play
+      end
+    end
   end
 
   def player_turn(player)
-    puts grid.user_grid
+    puts
     print "#{player.name}, make your column choice: "
     col_player = gets.chomp!
     grid.swap(col_player, player.element)
     player.moves.push(col_player.to_i)
+    puts
+    puts grid.user_grid
   end
 end

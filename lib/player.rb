@@ -10,7 +10,7 @@ class Player
 
   def initialize(name, element)
     @name = name
-    @moves = [1,1,1]
+    @moves = []
     @element = element
   end
 end
