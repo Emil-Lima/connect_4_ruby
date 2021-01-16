@@ -9,11 +9,10 @@ module MultiFunction
         return
       end
     end
-    "keep playing"
+    'keep playing'
   end
 
   def vertical_victory(player)
-    length_full_array = grid.background_grid.length - 1
     length_element_array = grid.background_grid[0].join.length - 1
     while length_element_array >= 0
       vertical = []
@@ -26,20 +25,15 @@ module MultiFunction
       end
       length_element_array -= 1
     end
-    "keep playing"
+    'keep playing'
   end
 
-  def diagonal_victory(player)
-
-    "keep playing"
+  def diagonal_victory(_player)
+    'keep playing'
   end
 
   def full_victory(player)
-    if vertical_victory(player) == "keep playing" && horizontal_victory(player)
-      return "keep playing"
-    else
-      return
-    end
+    'keep playing' if vertical_victory(player) == 'keep playing' && horizontal_victory(player)
   end
 
   def victory_message(name)
@@ -48,11 +42,9 @@ module MultiFunction
 
   def round
     player_turn(player1)
-    if full_victory(@player1) == "keep playing"
+    if full_victory(@player1) == 'keep playing'
       player_turn(player2)
-      if full_victory(@player2) == "keep playing"
-        play
-      end
+      play if full_victory(@player2) == 'keep playing'
     end
   end
 
