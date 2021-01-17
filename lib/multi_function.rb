@@ -28,12 +28,52 @@ module MultiFunction
     'keep playing'
   end
 
-  def diagonal_victory(_player)
+  def diagonal_victory(player)
+    'keep playing' if diagonal_right_to_left(player) == 'keep playing' && diagonal_left_to_right(player)
+  end
+
+  # In this method we are taking advantage of Ruby's capability to handle negative indexes
+  def diagonal_right_to_left(player)
+    length_element_array = grid.background_grid[0].join.length - 1
+    while length_element_array >= 0
+      inside_lenght_element = length_element_array
+      diagonal = []
+      grid.background_grid.map do |el|
+        diagonal.push(el.join[inside_lenght_element])
+        inside_lenght_element -= 2
+      end
+      if diagonal.join.include?("#{player.element}#{player.element}#{player.element}#{player.element}")
+        victory_message(player.name)
+        return
+      end
+      length_element_array -= 1
+    end
+    'keep playing'
+  end
+
+  # In this method we are taking advantage of Ruby's capability to handle negative indexes
+  def diagonal_left_to_right(player)
+    length_element_array = grid.background_grid[0].join.length - 1
+    while length_element_array >= 0
+      inside_lenght_element = length_element_array
+      diagonal = []
+      grid.background_grid.reverse.map do |el|
+        diagonal.push(el.join[inside_lenght_element])
+        inside_lenght_element -= 2
+      end
+      if diagonal.join.include?("#{player.element}#{player.element}#{player.element}#{player.element}")
+        victory_message(player.name)
+        return
+      end
+      length_element_array -= 1
+    end
     'keep playing'
   end
 
   def full_victory(player)
-    'keep playing' if vertical_victory(player) == 'keep playing' && horizontal_victory(player)
+    if vertical_victory(player) == 'keep playing' && horizontal_victory(player) && diagonal_victory(player)
+      'keep playing'
+    end
   end
 
   def victory_message(name)
