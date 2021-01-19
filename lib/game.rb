@@ -8,19 +8,14 @@ require './lib/multi_function'
 class Game
   include MultiFunction
 
-  attr_accessor :player1, :player2, :grid, :num_of_round
+  attr_accessor :player1, :player2, :grid, :num_of_round, :player_count
 
   def initialize
-    print 'Player1, type your name: '
-    p1 = gets.chomp!
-    p1 = 'player1' if p1.empty?
-    @player1 = Player.new(p1, 'x')
-    print 'Player2, type your name: '
-    p2 = gets.chomp!
-    p2 = 'Player2' if p2.empty? || p2 == p1
-    @player2 = Player.new(p2, 'o')
+    @player1 = Player.new('x')
+    @player2 = Player.new('o')
     @grid = Grid.new
     @num_of_round = 0
+    Player.player_restart
   end
 
   def first_grid
