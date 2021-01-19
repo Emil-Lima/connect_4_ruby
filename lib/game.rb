@@ -11,8 +11,12 @@ class Game
   attr_accessor :player1, :player2, :grid, :num_of_round
 
   def initialize
-    @player1 = Player.new('player1', 'x')
-    @player2 = Player.new('player2', 'o')
+    print 'Player1, type your name: '
+    p1 = gets.chomp!
+    @player1 = Player.new(p1, 'x')
+    print 'Player2, type your name: '
+    p2 = gets.chomp!
+    @player2 = Player.new(p2, 'o')
     @grid = Grid.new
     @num_of_round = 0
   end
