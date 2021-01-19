@@ -13,9 +13,11 @@ class Game
   def initialize
     print 'Player1, type your name: '
     p1 = gets.chomp!
+    p1 = 'player1' if p1.empty?
     @player1 = Player.new(p1, 'x')
     print 'Player2, type your name: '
     p2 = gets.chomp!
+    p2 = 'Player2' if p2.empty? || p2 == p1
     @player2 = Player.new(p2, 'o')
     @grid = Grid.new
     @num_of_round = 0
