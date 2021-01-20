@@ -3,4 +3,5 @@
 require './lib/game_run'
 
 include GameRun
+
 full_game

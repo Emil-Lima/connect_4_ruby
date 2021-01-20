@@ -11,8 +11,8 @@ class Game
   attr_accessor :player1, :player2, :grid, :num_of_round, :player_count
 
   def initialize
-    @player1 = Player.new('x')
-    @player2 = Player.new('o')
+    @player1 = Player.new
+    @player2 = Player.new
     @grid = Grid.new
     @num_of_round = 0
     Player.player_restart
