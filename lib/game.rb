@@ -15,7 +15,6 @@ class Game
     @player2 = Player.new
     @grid = Grid.new
     @num_of_round = 0
-    Player.player_restart
   end
 
   def first_grid

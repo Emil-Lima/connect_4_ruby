@@ -77,7 +77,7 @@ module MultiFunction
   end
 
   def victory_message(name)
-    puts "#{name} wins!"
+    puts "\n#{name} wins!\n "
   end
 
   def round
@@ -92,9 +92,19 @@ module MultiFunction
     puts
     print "#{player.name}, make your column choice: "
     col_player = gets.chomp!
-    grid.swap(col_player, player.element)
-    player.moves.push(col_player.to_i)
-    puts
-    puts grid.user_grid
+    right_or_wrong_col(col_player, player)
+  end
+
+  def right_or_wrong_col(column, player)
+    if column.empty? || column.to_i.class != Integer || column.to_i > 7 || column.to_i < 1 ||
+       Player.show_used_elements.include?(grid.background_grid[0][0][column.to_i + column.to_i - 1])
+      puts "\nThat's not a valid move. Please, select again."
+      player_turn(player)
+    else
+      grid.swap(column, player.element)
+      player.moves.push(column.to_i)
+      puts
+      puts grid.user_grid
+    end
   end
 end

@@ -12,13 +12,14 @@ module GameRun
   end
 
   def replay
-    print 'Do you want to play again?(type y if yes): '
+    print 'Do you want to play again? (type y if yes): '
     answer = gets.chomp!
     if answer == 'y'
       puts "The new game is starting now:\n "
+      Player.player_restart
       full_game
     else
-      puts 'Thanks for playing!'
+      puts "\nThanks for playing!"
     end
   end
 end
